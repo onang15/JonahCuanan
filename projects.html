@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+<title>JC - Projects</title>
+<link rel="icon" type="image/png" href="logo1.png">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style>
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+    
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+  
+        body {
+            -ms-overflow-style: none;  
+            scrollbar-width: none; 
+            overflow-x: hidden; 
+        }
+
+  :root {
+    --pink: #FF61D8;
+    --purple: #8A4FFF;
+    --blue: #4F8AFF;
+    --yellow: #FFD166;
+  }
+
+  html[data-theme="dark"] {
+    --bg-color: #20204a;
+    --text-color: #ffffff;
+    --header-line: rgba(255, 255, 255, 0.2);
+    --text-color-muted: #b0b0cc;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --card-border: rgba(255, 255, 255, 0.1);
+    --logo-gradient: linear-gradient(90deg, var(--blue), var(--purple));
+    --nav-hover-color: var(--pink);
+    --skill-icon-gradient: linear-gradient(45deg, var(--purple), var(--pink));
+    --circle-opacity: 0.08;
+    --card-shadow: rgba(138, 79, 255, 0.2);
+    --ring-border-1: rgba(255, 97, 216, 0.3);
+    --ring-border-2: rgba(79, 138, 255, 0.3);
+    --btn-primary-shadow: rgba(138, 79, 255, 0.4);
+    --btn-primary-hover-shadow: rgba(138, 79, 255, 0.6);
+    --skill-progress-bg: rgba(255, 255, 255, 0.1);
+    --skill-progress-fill: linear-gradient(90deg, var(--purple), var(--pink));
+    --overlay-bg: rgba(32, 32, 74, 0.7);
+    --btn-text: #ffffff;
+    --btn-bg-1: #8A4FFF;
+    --btn-bg-2: #4F8AFF;
+    --btn-hover-bg-1: #9A5FFF;
+    --btn-hover-bg-2: #5F9AFF;
+  }
+
+  html[data-theme="light"] {
+    --bg-color: #f5f5ff;
+    --header-line: rgba(32, 32, 74, 0.2);
+    --text-color: #20204a;
+    --text-color-muted: #444464;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --card-border: rgba(138, 79, 255, 0.2);
+    --logo-gradient: linear-gradient(90deg, var(--purple), var(--blue));
+    --nav-hover-color: var(--purple);
+    --skill-icon-gradient: linear-gradient(45deg, var(--pink), var(--purple));
+    --circle-opacity: 0.05;
+    --card-shadow: rgba(138, 79, 255, 0.15);
+    --ring-border-1: rgba(255, 97, 216, 0.2);
+    --ring-border-2: rgba(79, 138, 255, 0.2);
+    --btn-primary-shadow: rgba(138, 79, 255, 0.25);
+    --btn-primary-hover-shadow: rgba(138, 79, 255, 0.4);
+    --skill-progress-bg: rgba(138, 79, 255, 0.1);
+    --skill-progress-fill: linear-gradient(90deg, var(--blue), var(--purple));
+    --overlay-bg: rgba(245, 245, 255, 0.7);
+    --btn-text: #ffffff;
+    --btn-bg-1: #4F8AFF;
+    --btn-bg-2: #8A4FFF;
+    --btn-hover-bg-1: #5F9AFF;
+    --btn-hover-bg-2: #9A5FFF;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3%;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .header-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--header-line);
+  margin: 0 0 1rem 0;
+  margin-top:-12px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%; 
+    margin-right: 10px;
+    font-style: white;
+    
+}
+
+.logo-text {
+    color: var(--text-color);
+}
+
+  .nav-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-item {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .nav-item:hover {
+    color: var(--nav-hover-color);
+  }
+
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    transition: width 0.3s;
+  }
+
+  .nav-item:hover::after {
+    width: 100%;
+  }
+  
+  .theme-toggle {
+    border: none;
+    background: none;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    background-color: rgba(138, 79, 255, 0.1);
+  }
+  .theme-toggle:hover {
+    background-color: rgba(138, 79, 255, 0.2);
+  }
+
+  /* Main content wrapper */
+  .main-content {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Projects Section */
+  .projects-container {
+    padding: 1rem 5% 2rem;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--purple), var(--pink));
+    border-radius: 2px;
+  }
+
+  .projects-intro {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: var(--text-color-muted);
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+/* Projects grid container */
+.projects-grid-container {
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .projects-grid-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  .projects-grid-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+  }
+
+  /* Modified: Four rows layout */
+  .projects-grid {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr); /* 4 rows */
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 15px 30px var(--card-shadow);
+  }
+.project-image-container {
+  width: 30%; 
+  height: 100%;
+  min-height: 180px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 15px 0 0 15px;
+  background-color: #1a1a35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    transition: transform 0.5s ease;
+  }
+  
+  .project-card:hover .project-image {
+    transform: scale(1.1);
+  }
+
+  /* Overlay effects */
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(26, 26, 53, 0.3) 0%, rgba(26, 26, 53, 0.5) 100%);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .project-card:hover .project-overlay {
+    opacity: 0.4;
+  }
+
+  /* Project content styling - modified for row layout */
+  .project-content {
+    padding: 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    width: 70%; 
+  }
+  .project-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+.project-description {
+  color: var(--text-color-muted);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  overflow: visible;
+  text-overflow: initial;
+  display: block;
+  max-height: none;
+  text-align: justify;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px var(--card-shadow);
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  opacity: 1;
+  z-index: 1;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  height: auto; 
+  min-height: 180px; 
+}
+
+
+  /* Badges */
+  .project-achievements {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: -0.5rem;
+  }
+
+  .achievement-badge {
+    background: rgba(138, 79, 255, 0.1);
+    border-radius: 20px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-color);
+    display: inline-block;
+  }
+
+  .embed-btn {
+    background: linear-gradient(135deg, var(--btn-bg-1), var(--btn-bg-2));
+    color: var(--btn-text);
+    border: none;
+    border-radius: 30px;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 15px rgba(79, 138, 255, 0.3);
+    margin-top: auto;
+    align-self: flex-end;
+    position: relative;
+    overflow: hidden;
+    width: auto;
+    margin-left: auto;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    text-decoration: none;
+  }
+  
+  .embed-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s;
+  }
+  
+  .embed-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(79, 138, 255, 0.4);
+    background: linear-gradient(135deg, var(--btn-hover-bg-1), var(--btn-hover-bg-2));
+  }
+  
+  .embed-btn:hover::before {
+    left: 100%;
+  }
+  
+  .embed-btn:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 8px rgba(79, 138, 255, 0.3);
+  }
+  
+  .embed-icon {
+    font-size: 14px;
+    display: inline-flex;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+    transition: transform 0.3s ease;
+  }
+  
+  .embed-btn:hover .embed-icon {
+    transform: translateX(3px);
+  }
+/* Fixed Modal styles */
+.embed-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.embed-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+  
+.modal-content {
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  width: 80%;
+  max-width: 900px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  border: 1px solid var(--card-border);
+  z-index: 1001;
+  margin: auto;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+/* Additional style to prevent body scrolling when modal is open */
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+  .embed-modal.active .modal-content {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  .embed-modal.active .modal-content {
+    transform: translateY(0);
+  }
+  .modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--card-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    background: var(--logo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .close-modal {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-color);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  .close-modal:hover {
+    color: var(--pink);
+  }
+  .modal-body {
+    padding: 1.5rem;
+  }
+  .modal-body p {
+  text-align: justify;
+  hyphens: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  word-break: keep-all;
+  text-justify: inter-word;
+}
+  .embed-iframe-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  .embed-iframe {
+    position: absolute;
+    top:0; left:0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  
+  /* Custom content for RCBCHSI modal */
+  .rcbchsi-modal-content {
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+  
+  .rcbchsi-features {
+    margin: 1.5rem 0;
+  }
+  
+  .rcbchsi-features h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--pink);
+  }
+  
+  .feature-list {
+    list-style-type: none;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-list li:before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: var(--purple);
+    font-size: 0.8rem;
+  }
+  
+  .project-screenshots {
+    margin: 2rem 0;
+  }
+  
+  .screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .screenshot-item {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid var(--card-border);
+  }
+  
+  .screenshot-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  
+  .screenshot-item:hover img {
+    transform: scale(1.03);
+  }
+  
+  .tech-stack {
+    margin-top: 2rem;
+  }
+  
+  .tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .tech-badge {
+    background: rgba(138, 79, 255, 0.1);
+    border-radius: 20px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid rgba(138, 79, 255, 0.2);
+  }
+  
+  @media(max-width:1024px){
+    .projects-grid-container{
+        margin-top:-60px;
+    }
+    .projects-grid {
+      grid-template-rows: repeat(6, auto); 
+    }
+    .project-card {
+      height: auto; 
+      flex-direction: column;
+    }
+    .project-image-container {
+      width: 100%;
+      height: 140px; 
+      border-radius: 10px 10px 0 0; 
+    }
+    .project-content {
+      width: 100%; 
+    }
+    .embed-btn {
+      align-self: flex-start;
+      margin-top: 3rem;
+    }
+    .screenshots-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media(max-width:640px){
+    .projects-grid-container{
+        margin-top:-60px;
+    }
+    .projects-grid {
+      grid-template-rows: repeat(6, auto); 
+      gap: 2rem;
+    }
+    .project-card {
+      margin-bottom: 0.5rem;
+    }
+    .project-image-container {
+      height: 120px;
+    }
+    .project-title {
+      font-size: 1rem;
+    }
+    .project-description {
+      font-size: 0.8rem;
+    }
+    .embed-btn {
+      width: 100%;
+      padding: 0.4rem 1rem;
+    }
+    .tech-badges {
+      gap: 0.5rem;
+    }
+    .tech-badge {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+    }
+  }
+  
+       /* Hamburger menu button - hidden on desktop */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 11;
+}
+
+.mobile-menu-btn span {
+  width: 30px;
+  height: 3px;
+  background: var(--text-color);
+  border-radius: 10px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* Mobile nav container */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 75%;
+  height: 100vh;
+  background-color: rgba(32, 32, 74, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 2rem;
+  transition: all 0.4s ease;
+  z-index: 10;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  justify-content: flex-start;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+}
+
+.mobile-nav-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin-left: 200px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.mobile-nav-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.mobile-nav-item {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-nav-item:hover {
+  color: var(--nav-hover-color);
+  padding-left: 0.5rem;
+}
+.mobile-theme-toggle {
+  margin-top: -412px;
+  align-self: center;
+  margin-right:200px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.overlay.open {
+  display: block;
+  opacity: 0;
+}
+@media (max-width: 768px) {
+  /* Navigation changes */
+  .nav-menu {
+    display: none;
+  }
+  
+  header .theme-toggle {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+    margin-left: 1rem;
+  }
+  
+  .mobile-nav {
+    display: flex;
+  }
+
+@media (max-width: 768px) {
+  .embed-modal {
+    align-items: center;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  
+  .modal-content {
+    width: 95%;
+    max-width: 95%;
+    margin: 0 auto;
+    transform: none !important;
+    position: relative;
+    max-height: 85vh;
+  }
+  
+  .embed-modal.active .modal-content {
+    transform: none !important;
+  }
+  
+  .modal-header {
+    padding: 1rem;
+  }
+  
+  .modal-body {
+    padding: 1rem;
+  }
+  
+  .screenshots-grid {
+    grid-template-columns: 1fr;
+  }
+}
+}
+
+</style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="logo.png" alt="JC Logo" class="logo-icon" />
+    <span class="logo-text">JC</span>
+</div>
+  <div class="nav-section">
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-item">Home</a>
+      <a href="about.html" class="nav-item">About</a>
+      <a href="skills.html" class="nav-item">Skills</a>
+      <a href="projects.html" class="nav-item active">Projects</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">☀️</button>
+  </div>
+</header>
+<div class="header-line"></div>
+
+<div class="main-content">
+  <!-- Projects Section -->
+  <section class="projects-container">
+    <h2 class="section-title">My Projects</h2>
+    <p class="projects-intro">
+      Explore my portfolio of completed projects that showcase my design and development skills.
+      Each project represents a unique challenge and innovative solution.
+    </p>
+    <div class="projects-grid-container">
+      <div class="projects-grid">
+        <!-- Row 1: Project Card 1 -->
+        <div class="project-card">
+          <div class="project-image-container">
+            <img src="dlsjbc.png" alt="DLSJBC School Webpage" class="project-image" />
+            <div class="project-overlay"></div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">DLSJBC School Webpage</h3>
+            <p class="project-description">
+              A responsive school website created using WordPress with drag-and-drop tools, combined with custom HTML and CSS for added design control. The project ensures intuitive navigation, clean layout, and modern styling to enhance user experience. It provides an engaging and professional online presence for De La Salle Juan Bosco College.
+            </p>
+            <div class="project-achievements">
+              <span class="achievement-badge">Web Design</span>
+              <span class="achievement-badge">UX/UI</span>
+              <span class="achievement-badge">HTML/CSS/JS</span>
+            </div>
+            <a href="https://dlsjbc6.devexpertsolutions.com/" class="embed-btn" target="_blank">
+                <span class="embed-icon">👁️</span> View Project
+              </a>
+          </div>
+        </div>
+        
+        <!-- Row 2: Project Card 2 -->
+        <div class="project-card">
+          <div class="project-image-container">
+            <img src="PMS1.png" alt="CCS Payment Monitoring System" class="project-image" />
+            <div class="project-overlay"></div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">CCS Payment Monitoring System</h3>
+            <p class="project-description">
+              The CCS Payment Monitoring System is a WordPress-based platform designed to streamline student payment tracking for the College of Computer Studies. It replaces manual processes with automated transaction logging and real-time balance updates. Administrators can easily input payments, while students receive instant email confirmations. A cron job runs on the 1st of every month to automatically send payment reminders, improving communication and consistency. This reduces errors, delays, and administrative workload. The system ensures transparency, accuracy, and efficiency in managing student financial records.
+            </p>
+            <div class="project-achievements">
+              <span class="achievement-badge">Web Application</span>
+              <span class="achievement-badge">Database Design</span>
+              <span class="achievement-badge">System Analysis</span>
+            </div>
+            <a href="https://payment.ccspseudocode.com/login.php" class="embed-btn" target="_blank">
+                <span class="embed-icon">👁️</span> View Project
+              </a>
+          </div>
+        </div>
+        
+        <!-- Row 3: Project Card 3 -->
+        <div class="project-card">
+          <div class="project-image-container">
+            <img src="IS1.png" alt="INKSPIRE AND SERVICES WEBSITE" class="project-image" />
+            <div class="project-overlay"></div>
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">INKSPIRE Website</h3>
+            <p class="project-description">
+              The INKSPIRE SERVICES Website is a creative services platform designed to showcase my professional offerings, including printing, typographic work, and digital branding. It features a modern, responsive interface that highlights services, pricing tailored for students, and an engaging user experience. This project emphasizes strong frontend development, clear visual identity, and intuitive navigation to attract and retain clients.
+            </p>
+            <div class="project-achievements">
+              <span class="achievement-badge">Web Design</span>
+              <span class="achievement-badge">Frontend Development</span>
+              <span class="achievement-badge">Branding</span>
+            </div>
+            <a href="https://inkspireservices.github.io/Inkspire-Services/index.html" class="embed-btn" target="_blank">
+                <span class="embed-icon">👁️</span> View Project
+              </a>
+          </div>
+        </div>
+        
+       <!-- Row 4: Project Card 4 (RCBCHSI) -->
+<div class="project-card">
+  <div class="project-image-container">
+    <img src="rcbchsi.png" alt="RCBCHSI Prism Dashboard" class="project-image" />
+    <div class="project-overlay"></div>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">RCBCHSI PRISM</h3>
+    <p class="project-description">
+      The manual tracking of student payments and information at Recaredo Castillo of Bislig City High School Inc. has led to issues like inconsistent records, misplaced files, and slow transaction processing. These challenges cause confusion during account verification, especially during enrollment and clearance. To address this, we are currently developing a system called RCBCHSI PRISM.
+    </p>
+    <div class="project-achievements">
+      <span class="achievement-badge">Database Design</span>
+      <span class="achievement-badge">System Analysis</span>
+      <span class="achievement-badge">Intranet Use</span>
+      <span class="achievement-badge">UX Design</span>
+    </div>
+    <button class="embed-btn" data-project="rcbchsi"><span class="embed-icon">👁️</span> View Project</button>
+  </div>
+</div>
+
+<!-- Row 5: Project Card 5 (Chikungunya Seminar) -->
+<div class="project-card">
+  <div class="project-image-container">
+    <img src="chikungunya4.jpg" alt="Chikungunya Virus Seminar" class="project-image" />
+    <div class="project-overlay"></div>
+  </div>
+  <div class="project-content">
+    <h3 class="project-title">Chikungunya Virus Awareness Seminar</h3>
+    <p class="project-description">
+      The rising incidence of Chikungunya virus infections in tropical regions has highlighted the need for improved public awareness and healthcare preparedness. This comprehensive seminar addresses the challenges of early detection, community response, and treatment protocols. The program aims to educate healthcare professionals, community leaders, and the general public on virus transmission patterns, symptom identification, and effective prevention strategies while establishing sustainable surveillance networks for monitoring outbreaks and implementing targeted interventions.
+    </p>
+    <div class="project-achievements">
+      <span class="achievement-badge">Vector Control</span>
+      <span class="achievement-badge">Public Health</span>
+      <span class="achievement-badge">Community Education</span>
+    </div>
+    <button class="embed-btn" data-project="chikungunya"><span class="embed-icon">👁️</span> View Seminar</button>
+  </div>
+</div>
+  <!-- Add this Project Card to your projects-grid (Row 6: Project Card 6) -->
+  <div class="project-card">
+    <div class="project-image-container">
+      <img src="entrep1.jpg" alt="Innovative Entrepreneurship Project" class="project-image" />
+      <div class="project-overlay"></div>
+    </div>
+    <div class="project-content">
+      <h3 class="project-title">Innovative Entrepreneurship Project</h3>
+      <p class="project-description">
+       Our business concept, titled OH MY SQUASH! a nutritious squash pancake outperformed 20 competing groups from 7 different sections to win the championship title. The project stood out for its innovative thinking, strategic market analysis, and comprehensive financial planning. We received special recognition for excellence in both oral defense and product quality. Our team effectively communicated complex business strategies while presenting a market-ready product that impressed the judges. OH MY SQUASH! captured attention not only for its originality but also for promoting health through a delicious and nutritious twist on a classic favorite.
+      </p>
+      <div class="project-achievements">
+        <span class="achievement-badge">Business Planning</span>
+        <span class="achievement-badge">Product Development</span>
+        <span class="achievement-badge">Financial Analysis</span>
+        <span class="achievement-badge">Market Research</span>
+      </div>
+      <button class="embed-btn" data-project="entrepreneurship"><span class="embed-icon">👁️</span> View Project</button>
+    </div>
+  </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Modal for RCBCHSI Project -->
+<div id="rcbchsi-modal" class="embed-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">RCBCHSI PRISM</h3>
+      <button class="close-modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="rcbchsi-modal-content">
+        <p>
+          RCBCHSI PRISM, which stands for Payment Record and Information System Management, is our recent project aimed at centralizing and streamlining student payment and information management. The system includes features such as grade-level promotion, archiving, marking students as graduates, and importing/exporting data via Excel or CSV files. It is designed to run locally within the school network to ensure secure, offline access and cost-efficiency.
+        </p>
+        
+        <div class="rcbchsi-features">
+          <h4>Key Features</h4>
+          <ul class="feature-list">
+            <li>Interactive data visualization with real-time filtering capabilities</li>
+          </ul>
+        </div>
+        
+        <div class="project-screenshots">
+          <h4>Project Screenshots</h4>
+          <div class="screenshots-grid">
+            <div class="screenshot-item">
+              <img src="registrar.png" alt="RCBCHSI Dashboard Overview" />
+            </div>
+            <div class="screenshot-item">
+              <img src="finance.png" alt="RCBCHSI Analytics View" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="tech-stack">
+          <h4>Technology Stack</h4>
+          <div class="tech-badges">
+            <span class="tech-badge">React.js</span>
+            <span class="tech-badge">Node.js</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Chikungunya Seminar -->
+<div id="chikungunya-modal" class="embed-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Chikungunya Virus Awareness Seminar</h3>
+      <button class="close-modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="chikungunya-modal-content">
+        <p>
+        This comprehensive seminar series focused on the Chikungunya virus, an emerging mosquito-borne disease known for causing severe joint pain, fever, and rashes. It was organized exclusively for Grade 12 students to raise awareness and understanding of the virus. I took charge of managing event logistics, which included budgeting, preparing documentation, and arranging meals and tokens for the guest speaker. I also led the planning and execution of a culminating activity that involved coordinating outreach with a health expert. Overall, the event was a valuable educational experience and a successful collaborative effort.
+        </p>
+        
+        <div class="chikungunya-features">
+          <h4>Seminar Modules</h4>
+          <ul class="feature-list">
+            <li>Epidemiology and Global Burden of Chikungunya</li>
+            <li>Vector Control Strategies for Aedes Mosquitoes</li>
+            <li>Treatment Protocols and Long-term Management</li>
+            <li>Community Education and Prevention Programs</li>
+          </ul>
+        </div>
+        
+        <div class="project-screenshots">
+          <h4>Seminar Resources</h4>
+          <div class="screenshots-grid">
+            <div class="screenshot-item">
+              <img src="chikungunya2.jpg" alt="Chikungunya Virus Lifecycle" />
+            </div>
+            <div class="screenshot-item">
+              <img src="chikungunya5.jpg" alt="Chikungunya Global Distribution Map" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="tech-stack">
+          <h4>Key Presenters and Partners</h4>
+          <div class="tech-badges">
+            <span class="tech-badge">School Nurse</span>
+            <span class="tech-badge">Teachers</span>
+          </div> </div>
+        </div>
+      </div>
+    </div> </div>
+
+
+<!-- Your Entrepreneurship Modal -->
+<div id="entrepreneurship-modal" class="embed-modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 class="modal-title">Innovative Entrepreneurship Project</h3>
+      <button class="close-modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="entrepreneurship-modal-content">
+        <p>
+          Our team developed an exceptional business concept that outperformed 20 competing groups from 5 different sections.Our comprehensive approach and innovative thinking earned us the championship title along with 
+          special recognition for oral defense excellence and product superiority.
+        </p>
+        
+        <div class="entrepreneurship-features">
+          <h4>Key Achievements</h4>
+          <ul class="feature-list">
+            <li>Overall Champion among 20 competing teams</li>
+            <li>Best in Oral Defense award for exceptional presentation</li>
+            <li>Best Product award for innovation and market viability</li>
+          </ul>
+        </div>
+        
+        <div class="project-screenshots">
+          <h4>Project Highlights</h4>
+          <div class="screenshots-grid">
+            <div class="screenshot-item">
+              <img src="entrep3.jpg" alt="Team Presentation" />
+            </div>
+            <div class="screenshot-item">
+              <img src="entrep2.jpg" alt="Product Showcase" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="tech-stack">
+          <h4>Project Components</h4>
+          <div class="tech-badges">
+            <span class="tech-badge">Business Model Canvas</span>
+            <span class="tech-badge">Financial Analysis</span>
+            <span class="tech-badge">Market Research</span>
+            <span class="tech-badge">Product Development</span>
+            <span class="tech-badge">Pitch Presentation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+ // Theme toggle functionality
+const themeToggle = document.getElementById('themeToggle');
+const htmlElement = document.documentElement;
+
+// Check for saved theme preference or use default
+const savedTheme = localStorage.getItem('theme') || 'dark';
+htmlElement.setAttribute('data-theme', savedTheme);
+themeToggle.innerHTML = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const currentTheme = htmlElement.getAttribute('data-theme');
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  
+  htmlElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem('theme', newTheme);
+  themeToggle.innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
+  
+  // Update background if needed
+  updateBackgroundForTheme(newTheme);
+});
+
+function updateBackgroundForTheme(theme) {
+  if (!particles) return;
+  
+  const opacity = theme === 'dark' ? 0.6 : 0.4;
+  particles.material.opacity = opacity;
+}
+
+// Modal Functionality for projects
+const modals = document.querySelectorAll('.embed-modal');
+const modalBtns = document.querySelectorAll('.embed-btn');
+const closeModalBtns = document.querySelectorAll('.close-modal');
+
+// Replace your openModal function with this improved version
+function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+  const scrollY = window.scrollY;
+  
+  // Store current scroll position
+  document.body.dataset.scrollPosition = scrollY;
+  
+  // Add active class to show modal
+  modal.classList.add('active');
+  
+  // Add modal-open class to body
+  document.body.classList.add('modal-open');
+  document.body.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = '100%';
+  
+  // Get the modal content element
+  const modalContent = modal.querySelector('.modal-content');
+  
+  // Reset any previous inline styles
+  modalContent.style.transform = 'none';
+  modalContent.style.marginTop = '0';
+  
+  // Adjust modal styles for proper centering
+  modal.style.display = 'flex';
+  modal.style.alignItems = 'center';
+  modal.style.justifyContent = 'center';
+  
+  // For mobile devices, maintain the scrollable behavior
+  if (window.innerWidth <= 768) {
+    modalContent.style.maxHeight = '80vh';
+    modalContent.style.width = '95%';
+    modalContent.style.margin = 'auto';
+  } else {
+    // For desktop, ensure it's centered
+    modalContent.style.maxHeight = '80vh';
+  }
+}
+
+// Replace your closeModal function with this improved version
+function closeModal(modal) {
+  // Remove active class to hide modal
+  modal.classList.remove('active');
+  
+  // Restore scrolling
+  document.body.classList.remove('modal-open');
+  
+  // Retrieve and restore scroll position
+  const scrollY = parseInt(document.body.dataset.scrollPosition || '0');
+  
+  // Reset modal content styles
+  const modalContent = modal.querySelector('.modal-content');
+  modalContent.style.transform = '';
+  modalContent.style.marginTop = '';
+  
+  // Reset body styles
+  document.body.style.position = '';
+  document.body.style.width = '';
+  document.body.style.top = '';
+  document.body.style.overflow = '';
+  
+  // Restore scroll position
+  window.scrollTo(0, scrollY);
+}
+
+// Add click events to all project buttons
+modalBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const projectId = btn.getAttribute('data-project');
+    openModal(`${projectId}-modal`);
+  });
+});
+
+// Close modal functionality for all close buttons
+closeModalBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const modal = btn.closest('.embed-modal');
+    closeModal(modal);
+  });
+});
+
+// Close modal when clicking outside any modal content
+modals.forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal(modal);
+    }
+  });
+});
+
+// Close modal with ESC key for any active modal
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const activeModal = document.querySelector('.embed-modal.active');
+    if (activeModal) {
+      closeModal(activeModal);
+    }
+  }
+});
+
+// Handle window resize to adjust modal positioning for all modals
+window.addEventListener('resize', () => {
+  const activeModal = document.querySelector('.embed-modal.active');
+  if (activeModal) {
+    const modalId = activeModal.id;
+    closeModal(activeModal);
+    setTimeout(() => {
+      openModal(modalId);
+    }, 10);
+  }
+});
+
+// Add some animation with GSAP for better UX
+document.addEventListener('DOMContentLoaded', () => {
+  // Animate project cards
+  gsap.from('.project-card', {
+    duration: 0.8,
+    y: 50,
+    opacity: 0,
+    stagger: 0.2,
+    ease: 'power3.out',
+    delay: 0.3
+  });
+  
+  // Animate section title
+  gsap.from('.section-title', {
+    duration: 1,
+    y: -30,
+    opacity: 0,
+    ease: 'back.out(1.7)'
+  });
+  
+  // Animate project intro text
+  gsap.from('.projects-intro', {
+    duration: 1,
+    y: 20,
+    opacity: 0,
+    delay: 0.2
+  });
+});
+ 
+// Mobile navigation handling
+document.addEventListener('DOMContentLoaded', function() {
+  // Create mobile navigation elements
+  const header = document.querySelector('header');
+  const body = document.querySelector('body');
+  
+  // Create mobile menu button
+  const mobileMenuBtn = document.createElement('button');
+  mobileMenuBtn.className = 'mobile-menu-btn';
+  mobileMenuBtn.setAttribute('aria-label', 'Toggle mobile menu');
+  mobileMenuBtn.innerHTML = `
+    <span></span>
+    <span></span>
+    <span></span>
+  `;
+  
+  // Function to adjust mobile nav background based on theme
+  const adjustMobileNavBackground = () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const mobileNav = document.querySelector('.mobile-nav');
+    if (!mobileNav) return;
+    
+    if (currentTheme === 'dark') {
+      mobileNav.style.backgroundColor = 'rgba(32, 32, 74, 0.85)';
+    } else {
+      mobileNav.style.backgroundColor = 'rgba(245, 245, 255, 0.85)';
+    }
+  };
+  
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  
+  // Create mobile navigation
+  const mobileNav = document.createElement('div');
+  mobileNav.className = 'mobile-nav';
+  mobileNav.innerHTML = `
+    <div class="mobile-nav-header">
+      <button class="mobile-nav-close" aria-label="Close menu">✕</button>
+    </div>
+    <div class="mobile-menu-items">
+     <a href="index.html" class="mobile-nav-item">Home</a>
+      <a href="about.html" class="mobile-nav-item">About</a>
+      <a href="skills.html" class="mobile-nav-item">Skills</a>
+      <a href="biography.html" class="mobile-nav-item">Projects</a>
+      <a href="#" class="mobile-nav-item">Contact</a>
+    </div>
+    <button id="mobileThemeToggle" class="theme-toggle mobile-theme-toggle" aria-label="Toggle dark/light mode">☀️</button>
+  `;
+  
+  // Add mobile menu button to header if it exists
+  if (header && header.querySelector('.nav-section')) {
+    const navSection = header.querySelector('.nav-section');
+    navSection.appendChild(mobileMenuBtn);
+    
+    // Add mobile navigation and overlay to body
+    body.appendChild(overlay);
+    body.appendChild(mobileNav);
+    
+    // Toggle mobile menu
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileNav.classList.add('open');
+      overlay.classList.add('open');
+      body.style.overflow = 'hidden'; // Prevent scrolling while menu is open
+    });
+    
+    // Close mobile menu
+    const closeMenu = () => {
+      mobileNav.classList.remove('open');
+      overlay.classList.remove('open');
+      body.style.overflow = '';
+    };
+    
+    mobileNav.querySelector('.mobile-nav-close').addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    
+    // Mobile theme toggle functionality
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    
+    mobileThemeToggle.addEventListener('click', () => {
+      if (htmlElement.getAttribute('data-theme') === 'dark') {
+        htmlElement.setAttribute('data-theme', 'light');
+        themeToggle.innerHTML = '🌙';
+        mobileThemeToggle.innerHTML = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        htmlElement.setAttribute('data-theme', 'dark');
+        themeToggle.innerHTML = '☀️';
+        mobileThemeToggle.innerHTML = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+      adjustMobileNavBackground();
+    });
+    
+    // Sync theme toggle states
+    const updateThemeIcons = () => {
+      const currentTheme = htmlElement.getAttribute('data-theme');
+      const themeIcon = currentTheme === 'dark' ? '☀️' : '🌙';
+      mobileThemeToggle.innerHTML = themeIcon;
+    };
+    
+    // Update mobile theme toggle when desktop toggle is clicked
+    themeToggle.addEventListener('click', () => {
+      updateThemeIcons();
+      adjustMobileNavBackground();
+    });
+    
+    // Initialize mobile theme toggle with correct icon
+    updateThemeIcons();
+    
+    // Initialize mobile nav background
+    adjustMobileNavBackground();
+    
+    // Handle window resize to reset menu state
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && mobileNav.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  }
+});
+
+// Font Awesome for icons
+document.addEventListener('DOMContentLoaded', function() {
+  // Add Font Awesome script if not already present
+  if (!document.querySelector('script[src*="font-awesome"]')) {
+    const fontAwesomeScript = document.createElement('script');
+    fontAwesomeScript.src = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js";
+    document.body.appendChild(fontAwesomeScript);
+  }
+});
+</script>
+</body>
+</html>
